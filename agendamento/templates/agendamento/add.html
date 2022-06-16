@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends 'agendamento/base.html' %}
+
+{% block content %}
+    <h1>Add member</h1>
+
+    <form action="addrecord/" method="post">
+        {% csrf_token %}
+
+        Descrição:<br>
+        <input name="descricao">
+        <br><br>
+        Data agendada:<br>
+        <input type="datetime-local" name="data_agendada">
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
