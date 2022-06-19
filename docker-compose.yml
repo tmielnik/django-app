@@ -1,0 +1,26 @@
+version: "3.8"
+
+services: # Lista de serviços
+  
+  server-django: # Define um nome para o server web do Django
+    build: . # Cria imagem com parametros definidos no Dockerfile no diretório atual
+    command: python manage.py runserver 0.0.0.0:8000 # Executa o comando python
+    volumes: 
+      - .:/code # Sincroniza os arquivos locais do diretório atual com o container do docker
+
+    ports: # Portas locais mapeadas no docker host
+      - 8000:8000 # Porta padrão do django
+    depends_on: 
+      - db-postgres # Possui dependencia do serviço db
+
+  db-postgres: # Define um nome para o serviço
+    image: postgres # Banco de dados usando imagem do postgres
+
+    environment:
+      POSTGRES_PASSWORD: ${PASSWORD}
+
+    volumes: # Volume/diretório compartilhado com o container para persistir os dados
+      - postgres_data:/var/lib/postgresql/data/
+
+volumes: # Define o nome dos volumes a serem utilizados
+  postgres_data:
