@@ -1,7 +1,8 @@
-from multiprocessing import context
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import Agendamento
+
+def index_agendamento(request):
+    return render(request, 'agendamento/base.html')
 
 def lista_agendamentos(request):
     agendamentos = Agendamento.objects.all()
