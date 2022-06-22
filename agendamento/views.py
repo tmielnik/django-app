@@ -3,9 +3,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Agendamento
 
-def index(request):
-    return render(request, 'agendamento/base.html')
-
 def lista_agendamentos(request):
     agendamentos = Agendamento.objects.all()
     context = {
