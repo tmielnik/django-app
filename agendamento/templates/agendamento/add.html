@@ -2,7 +2,7 @@
 {% extends 'agendamento/base.html' %}
 
 {% block content %}
-    <h1>Add member</h1>
+    <h1>Add agendamento</h1>
 
     <form action="addrecord/" method="post">
         {% csrf_token %}
@@ -15,4 +15,5 @@
         <br><br>
         <input type="submit" value="Submit">
     </form>
+    <p><a href="{% url 'index_agendamento' %}">voltar</a></p>
 {% endblock %}
