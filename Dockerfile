@@ -1,14 +1,15 @@
-FROM python:latest
+FROM python:3.10.4
 
-# set environment variables
+# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /code
+# Define diretório no container onde será copiado os códigos do projeto
+WORKDIR /code 
 
-RUN pip install --upgrade pip
-
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
+# Copia todos os arquivos locais para o container
 COPY . .
+
+# Instala as dependências do projeto
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
