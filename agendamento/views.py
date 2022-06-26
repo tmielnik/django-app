@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Agendamento
 
 def index_agendamento(request):
-    return render(request, 'agendamento/index_agendamento.html')
+    return render(request, 'agendamento/index_agendamento.html', {})
 
 def lista_agendamentos(request):
     agendamentos = Agendamento.objects.all()
