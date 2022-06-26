@@ -1,0 +1,9 @@
+{% extends 'agendamento/base.html' %}
+
+{% block content %}
+    <ul>
+        <li><a href="{% url 'lista_agendamentos' %}">Lista agendamentos</a></li>
+        <li><a href="{% url 'add_agendamento' %}">Adiciona agendamento</a></li>
+    </ul>
+{% endblock content %}
+
