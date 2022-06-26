@@ -18,5 +18,7 @@
             </tr>
         {% endfor %}    
     </table>
-    <p><a href="add/">Add Agendamento</a></p>
+    
+    <p><a href="{% url 'add_agendamento' %}">Add Agendamento</a></p>
+    <p><a href="{% url 'index_agendamento' %}">voltar</a></p>
 {% endblock %}    
