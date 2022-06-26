@@ -1,26 +1,41 @@
 version: "3.8"
 
-services: # Lista de serviços
-  
-  server-django: # Define um nome para o server web do Django
+services: # Lista os serviços a serem executados no Docker
+  django-server: # Nome do servidor web do django
     build: . # Cria imagem com parametros definidos no Dockerfile no diretório atual
-    command: python manage.py runserver 0.0.0.0:8000 # Executa o comando python
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000" # Comandos python para serem executados ao subir o servidor
     volumes: 
-      - .:/code # Sincroniza os arquivos locais do diretório atual com o container do docker
+      - .:/code # Sincroniza todos os arquivos do projeto para o diretório /code no container
 
-    ports: # Portas locais mapeadas no docker host
+    ports: # Mapeamento da porta local para a porta do container
       - 8000:8000 # Porta padrão do django
-    depends_on: 
-      - db-postgres # Possui dependencia do serviço db
+      
+    networks: # Define a network a ser utilizada
+      - db_network
 
-  db-postgres: # Define um nome para o serviço
+    depends_on: 
+      - db-server # Possui dependencia do serviço db
+
+  db-server: # Define um nome para o serviço
     image: postgres # Banco de dados usando imagem do postgres
 
-    environment:
-      POSTGRES_PASSWORD: ${PASSWORD}
+    ports: # Mapeamento da porta local do PC para a porta do container
+      - 5432:5432 # Porta padrão do postgres
+
+    environment: # Declaração de variáveis de ambientes a serem utilizadas no serviço
+      POSTGRES_DB: ${POSTGRES_NAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    networks: # Define a network a ser utilizada
+      - db_network
 
     volumes: # Volume/diretório compartilhado com o container para persistir os dados
       - postgres_data:/var/lib/postgresql/data/
-
-volumes: # Define o nome dos volumes a serem utilizados
+    
+volumes: # Declaração do volume a ser utilizado para salvar permanente os dados do banco de dados postgres
   postgres_data:
+
+networks: # Declaração de network a ser utilizada nos serviços
+  db_network:
+    driver: bridge
