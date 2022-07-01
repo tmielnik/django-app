@@ -4,24 +4,24 @@ from .models import Agendamento
 
 
 def index_agendamento(request):
-    return render(request, 'agendamento/index_agendamento.html', {})
+    return render(request, "agendamento/index_agendamento.html", {})
 
 def lista_agendamentos(request):
     agendamentos = Agendamento.objects.all()
     context = {
-        'agendamentos':agendamentos,
+        "agendamentos": agendamentos,
     }
-    return render(request, 'agendamento/list.html', context)
+    return render(request, "agendamento/list.html", context)
 
 def add_agendamento(request):
-    form = AgendamentoForm(request.Post)
+    form = AgendamentoForm(request.POST or None)
     
-    if request.Post:
+    if request.method == "POST":
         if form.is_valid():
             form.save()
-            return redirect('lista_agendamentos')
+            return redirect("lista_agendamentos")
     
     context = {
-        'form':form
+        'form': form
     }
-    return render(request, 'agendamento/add.html', context)
+    return render(request, "agendamento/add.html", context)
