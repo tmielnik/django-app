@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from agendamento.forms import AgendamentoForm
 from .models import Agendamento
+
 
 def index_agendamento(request):
     return render(request, 'agendamento/index_agendamento.html', {})
@@ -12,5 +14,14 @@ def lista_agendamentos(request):
     return render(request, 'agendamento/list.html', context)
 
 def add_agendamento(request):
-  
-    return render(request, 'agendamento/add.html', {})
+    form = AgendamentoForm(request.Post)
+    
+    if request.Post:
+        if form.is_valid():
+            form.save()
+            return redirect('lista_agendamentos')
+    
+    context = {
+        'form':form
+    }
+    return render(request, 'agendamento/add.html', context)
