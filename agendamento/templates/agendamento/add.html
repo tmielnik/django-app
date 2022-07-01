@@ -1,16 +1,21 @@
-<!DOCTYPE html>
 {% extends 'agendamento/base.html' %}
 
 {% block content %}
 
-    <h2>Add agendamento</h2>
+    <div class="card">
+        <div class="card-body">
+            <h4>Add agendamento</h4>
+            <hr>
 
-    <form action="{% url 'add_agendamento' %}" method="post">
-        {% csrf_token %}
-        {% form.as_p %}
-       
-        <button class='btn btn-success' type="submit">Salvar</button>
-        <p><a class='btn btn-danger' href="{% url 'index_agendamento' %}">Cancelar</a></p>
-    </form>
+            <form action="{% url 'add_agendamento' %}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+               
+                <button class='btn btn-success' type="submit">Salvar</button>
+                <p><a class='btn btn-danger' href="{% url 'index_agendamento' %}">Cancelar</a></p>
+            </form>
+
+        </div>
+    </div>
 
 {% endblock %}
