@@ -3,22 +3,34 @@
 
 {% block content %}
     <table class="table table-dark table-hover">
-        <tr>
-            <th>Data</th>
-            <th>Descrição</th>
-            <th>Data agendada</th>
-            <th>Agendamento feito por</th>
-        </tr>
-        {% for ag in agendamentos %}
+        <thead>
             <tr>
-                <td>{{ ag.data_registro }}</td>
-                <td>{{ ag.descricao }}</td>
-                <td>{{ ag.data_agendada }}</td>
-                <td>{{ ag.usuario }}</td>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Data agendada</th>
+                <th>Hora agendada</th>
+                <th>Usuário</th>
+                <th>Opções</th>
             </tr>
-        {% endfor %}    
+        </thead>
+        <tbody>
+            {% for ag in agendamentos %}
+                <tr>
+                    <td>{{ ag.data_registro }}</td>
+                    <td>{{ ag.descricao }}</td>
+                    <td>{{ ag.data_agendada }}</td>
+                    <td>{{ ag.hora_agendada }}</td>
+                    <td>{{ ag.usuario }}</td>
+                    <td>
+                        <button type="button" class="btn btn-warning">Editar</button>
+                        <button type="button" class="btn btn-danger">Excluir</button>
+                    </td>
+                </tr>
+            {% endfor %}    
+        </tbody>
     </table>
     
-    <p><a href="{% url 'add_agendamento' %}">Add Agendamento</a></p>
-    <p><a href="{% url 'index_agendamento' %}">voltar</a></p>
+    <a class="btn btn-success" href="{% url 'add_agendamento' %}" role="button">Adicionar</a>
+    <a class="btn btn-primary" href="{% url 'index_agendamento' %}" role="button">Voltar</a>
+    
 {% endblock %}    
