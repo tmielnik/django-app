@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.index_agendamento, name='index_agendamento'),
     path('list/', views.lista_agendamentos, name='lista_agendamentos'),
     path('add/', views.add_agendamento, name='add_agendamento'),
+    path('edit/<int:agendamento_pk>', views.edit_agendamento, name='edit_agendamento')
 ]
