@@ -22,8 +22,8 @@
                     <td>{{ ag.hora_agendada }}</td>
                     <td>{{ ag.usuario }}</td>
                     <td>
-                        <button type="button" class="btn btn-warning">Editar</button>
-                        <button type="button" class="btn btn-danger">Excluir</button>
+                        <a class="btn btn-warning" href="{% url 'edit_agendamento' ag.id %}" role="button">Editar</a>
+                        <a class="btn btn-danger" href="#" role="button">Excluir</a>
                     </td>
                 </tr>
             {% endfor %}    
