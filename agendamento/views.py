@@ -1,4 +1,3 @@
-from multiprocessing import context
 from django.shortcuts import redirect, render
 from agendamento.forms import AgendamentoForm
 from .models import Agendamento
@@ -36,8 +35,8 @@ def add_agendamento(request):
 
 
 # Edita agendamento cadastrado
-def edit_agendamento(request, agendamento_pk):
-    agendamento = Agendamento.objects.get(pk=agendamento_pk)
+def edit_agendamento(request, pk_agendamento):
+    agendamento = Agendamento.objects.get(pk=pk_agendamento)
     form = AgendamentoForm(request.POST or None, instance=agendamento)
 
     if request.method == "POST":
@@ -51,3 +50,11 @@ def edit_agendamento(request, agendamento_pk):
         "form": form
     }
     return render(request, "agendamento/add.html", context)
+
+
+# Deleta agendamento cadastrado
+def delete_agendamento(request, pk_agendamento):
+    agendamento = Agendamento.objects.get(pk=pk_agendamento)
+    agendamento.delete()
+    
+    return redirect("lista_agendamentos")
