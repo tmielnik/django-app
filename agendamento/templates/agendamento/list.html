@@ -23,10 +23,11 @@
                     <td>{{ ag.usuario }}</td>
                     <td>
                         <a class="btn btn-warning" href="{% url 'edit_agendamento' ag.id %}" role="button">Editar</a>
-                        <a class="btn btn-danger" href="#" role="button">Excluir</a>
+                        <a class="btn btn-danger" href="{% url 'delete_agendamento' ag.id %}" role="button" 
+                            onclick="return confirm('Confirma exclusão?')">Excluir</a>
                     </td>
                 </tr>
-            {% endfor %}    
+            {% endfor %}
         </tbody>
     </table>
     
